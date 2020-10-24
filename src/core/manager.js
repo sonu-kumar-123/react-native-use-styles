@@ -1,4 +1,3 @@
-// TODO: p(124235, 'fl-row') to send the identifier of a Stylesheet.create style
 import transform from "./transformer";
 import { getFromCache, setInCache } from "./cache";
 import {
@@ -97,6 +96,7 @@ export const GlobalUse = (rawStyles, namespace) => {
   };
 };
 
+// TODO: GlobalStyles({ [style]: 124235 }); receives a Stylesheet identifier (?)
 export const GlobalStyles = (definition, namespace) => {
   for (let [key, rawStyles] of Object.entries(definition)) {
     let styles = rawStyles;

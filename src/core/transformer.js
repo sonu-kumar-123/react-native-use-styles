@@ -5,64 +5,40 @@ import { DEFAULT_SEPARATOR } from "../constants";
 
 export let separator = DEFAULT_SEPARATOR;
 
-const getKeyFromParts = (node, parts, pos) => {
-  let currentPart = parts[pos];
-  currentPart = aliasesDictionary[currentPart] || currentPart;
+// value is always located in the last part
+const getValueFromParts = (parts, getConstant) => {
+  let value = parts[parts.length - 1];
 
-  return node[currentPart];
+  if (hasConstant(value)) {
+    value = getConstant(value);
+  } else {
+    value = aliasesDictionary[value] || value;
+  }
+
+  return parseFloat(value) || value;
 };
 
-const getValueFromParts = (parts, pos, getConstant) => {
-  let newPos = pos;
-  let value = "";
+const getKeyFromParts = parts => {
+  let current = stylesDictionary;
 
-  while (newPos < parts.length) {
-    let newValue = parts[newPos];
-
-    if (hasConstant(newValue)) {
-      newValue = getConstant(newValue);
-    } else {
-      newValue = aliasesDictionary[newValue] || newValue;
-    }
-
-    value += ` ${newValue}`;
-    newPos += 1;
-  }
-  value = value.substring(1);
-  if (value.indexOf(" ") === -1) {
-    value = parseFloat(value) || value;
+  for (let x = 0; x < parts.length - 1; x += 1) {
+    let part = parts[x];
+    part = aliasesDictionary[part] || part;
+    current = current[part];
   }
 
-  return [value, newPos];
+  return current.__propName;
 };
 
 // PRECONDITION: at least one key-value pair exists in the path
-// TODO: should we take the last part as the value (?)
 export default (path, getConstant) => {
-  let style = Object.create(null);
   const parts = path.split(separator);
+  const key = getKeyFromParts(parts);
+  const value = getValueFromParts(parts, getConstant);
 
-  // iterates until find a value, then get values until end
-  let currentNode = getKeyFromParts(stylesDictionary, parts, 0);
-  let pos = 1;
-  while (pos < parts.length) {
-    const lastNode = currentNode;
-    currentNode = getKeyFromParts(currentNode, parts, pos);
-
-    // if it's an object we need to keep digging, otherwise is undefined cause we found a value
-    if (!currentNode) {
-      const [value, newPos] = getValueFromParts(parts, pos, getConstant);
-      pos = newPos;
-
-      Object.assign(style, {
-        [lastNode.__propName]: value
-      });
-    }
-
-    pos += 1;
-  }
-
-  return style;
+  return Object.assign(Object.create(null), {
+    [key]: value
+  });
 };
 
 export const setSeparator = newSeparator => {

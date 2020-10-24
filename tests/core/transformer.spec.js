@@ -23,18 +23,6 @@ describe("utils", () => {
     });
   });
 
-  it("transforms key:value:value path", () => {
-    expect(transform("flex:1:2")).toMatchObject({
-      flex: "1 2"
-    });
-  });
-
-  it("transforms key:key:value:value path", () => {
-    expect(transform("background:color:green:red")).toMatchObject({
-      backgroundColor: "green red"
-    });
-  });
-
   it("transforms aliases for keys", () => {
     expect(transform("fx:1")).toMatchObject({
       flex: 1
