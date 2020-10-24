@@ -9,7 +9,7 @@ export default function App() {
   const s = useStyles([isDisabled]);
 
   return (
-    <View style={s`.container`}>
+    <View style={s`test:value`}>
       <Text style={s`.centered font:size:$title &disabled`}>Hello Planet!</Text>
       <Button onPress={() => setDisabled(current => !current)} title="toggle" />
     </View>

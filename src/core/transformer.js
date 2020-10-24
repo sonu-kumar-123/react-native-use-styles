@@ -5,8 +5,10 @@ import { DEFAULT_SEPARATOR } from "../constants";
 
 export let separator = DEFAULT_SEPARATOR;
 
-// value is always located in the last part
+export const hasPath = style => style.indexOf(separator) !== -1;
+
 const getValueFromParts = (parts, getConstant) => {
+  // value is always located in the last part
   let value = parts[parts.length - 1];
 
   if (hasConstant(value)) {
@@ -25,6 +27,17 @@ const getKeyFromParts = parts => {
     let part = parts[x];
     part = aliasesDictionary[part] || part;
     current = current[part];
+
+    // TODO: test this warning
+    if (current === undefined) {
+      if (process.env.NODE_ENV !== "production") {
+        console.warn(
+          `Invalid-Style-Key: ${part} is not a valid style key. You are seeing this warning because you are in development mode. In a production build there will be no warning.`
+        );
+      }
+
+      return;
+    }
   }
 
   return current.__propName;

@@ -1,10 +1,18 @@
-import transform, { setSeparator } from "../../src/core/transformer";
+import transform, { hasPath, setSeparator } from "../../src/core/transformer";
 import { setInCache, clearCache } from "../../src/core/cache";
 import { getFromStorage } from "../../src/core/manager";
 
 describe("utils", () => {
   beforeEach(() => {
     setSeparator(":");
+  });
+
+  it("hasPath finds a path", () => {
+    expect(hasPath("flex:dir:1")).toBe(true);
+  });
+
+  it("hasPath doesn't find a path", () => {
+    expect(hasPath(".class")).toBe(false);
   });
 
   it("transforms key:value path", () => {

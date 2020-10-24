@@ -1,4 +1,4 @@
-import transform from "./transformer";
+import transform, { hasPath } from "./transformer";
 import { getFromCache, setInCache } from "./cache";
 import {
   hasConstant,
@@ -7,8 +7,7 @@ import {
   getKey,
   isNamespace,
   getKeyFromNamespace,
-  getNamespace,
-  hasPath
+  getNamespace
 } from "../utils";
 import { CONSTANTS_KEY, COMPUTED_KEY } from "../constants";
 
