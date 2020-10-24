@@ -5,6 +5,7 @@ import { getFromStorage } from "../../src/core/manager";
 describe("utils", () => {
   beforeEach(() => {
     setSeparator(":");
+    console.warn = jest.fn();
   });
 
   it("hasPath finds a path", () => {
@@ -85,5 +86,13 @@ describe("utils", () => {
   it("sets a separator", () => {
     setSeparator("-");
     expect(transform("flex-1")).toMatchObject({ flex: 1 });
+  });
+
+  it("Development mode only: transform produces a console.warn when providing an Invalid-Style-Key", () => {
+    expect(transform("non-existent:1")).toMatchObject({ undefined: 1 });
+    expect(console.warn).toBeCalledTimes(1);
+    expect(console.warn).toHaveBeenLastCalledWith(
+      'Invalid-Style-Key: "non-existent" is not a valid key for styles. You are seeing this warning because you are in development mode. In a production build there will be no warning.'
+    );
   });
 });

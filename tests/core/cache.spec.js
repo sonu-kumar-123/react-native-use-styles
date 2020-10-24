@@ -21,7 +21,7 @@ describe("utils", () => {
     expect(getFromCache("style", "namespace")).toBe(true);
     expect(console.warn).toBeCalledTimes(1);
     expect(console.warn).toHaveBeenLastCalledWith(
-      'Non-Existent-Namespace: The following namespace does not exist or has not been imported: "namespace". You are seeing this warning because you are in development mode. In a production build there will be no warning and these styles will be ignored.'
+      'Non-Existent-Namespace: Namespace "namespace" does not exist or has not been imported. You are seeing this warning because you are in development mode. In a production build there will be no warning and these styles will be ignored.'
     );
   });
 
@@ -29,7 +29,7 @@ describe("utils", () => {
     expect(getFromCache("style", "namespace")).toBe(undefined);
     expect(console.warn).toBeCalledTimes(1);
     expect(console.warn).toHaveBeenLastCalledWith(
-      'Non-Existent-Namespace: The following namespace does not exist or has not been imported: "namespace". You are seeing this warning because you are in development mode. In a production build there will be no warning and these styles will be ignored.'
+      'Non-Existent-Namespace: Namespace "namespace" does not exist or has not been imported. You are seeing this warning because you are in development mode. In a production build there will be no warning and these styles will be ignored.'
     );
   });
 });
