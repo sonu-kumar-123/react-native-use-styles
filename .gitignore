@@ -5,6 +5,7 @@ node_modules
 cjs
 
 # misc
+.expo
 .DS_Store
 
 npm-debug.log
