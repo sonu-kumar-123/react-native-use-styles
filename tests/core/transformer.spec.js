@@ -92,7 +92,7 @@ describe("utils", () => {
     expect(transform("non-existent:1")).toMatchObject({ undefined: 1 });
     expect(console.warn).toBeCalledTimes(1);
     expect(console.warn).toHaveBeenLastCalledWith(
-      'Invalid-Style-Key: "non-existent" is not a valid key for styles. You are seeing this warning because you are in development mode. In a production build there will be no warning.'
+      'useStyles Invalid-Style-Key: "non-existent" is not a valid key for styles. You are seeing this warning because you are in development mode. In a production build there will be no warning.'
     );
   });
 });

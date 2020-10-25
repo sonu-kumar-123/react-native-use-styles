@@ -1,12 +1,11 @@
 {
   "name": "react-native-use-styles",
-  "version": "1.2.3",
+  "version": "1.3.0",
   "description": "React Native useStyles",
   "main": "index.js",
   "module": "src/index.js",
   "types": "src/index.d.ts",
   "files": [
-    "src",
     "cjs",
     "README.md"
   ],
@@ -29,7 +28,8 @@
     "styles",
     "namespace",
     "hooks",
-    "class"
+    "classes",
+    "CSS"
   ],
   "author": "Agustín Prieto <agustin@rootstrap.com>",
   "license": "MIT",

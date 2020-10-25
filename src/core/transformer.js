@@ -28,11 +28,10 @@ const getKeyFromParts = parts => {
     part = aliasesDictionary[part] || part;
     current = current[part];
 
-    // TODO: test this warning
     if (current === undefined) {
       if (process.env.NODE_ENV !== "production") {
         console.warn(
-          `Invalid-Style-Key: "${part}" is not a valid key for styles. You are seeing this warning because you are in development mode. In a production build there will be no warning.`
+          `useStyles Invalid-Style-Key: "${part}" is not a valid key for styles. You are seeing this warning because you are in development mode. In a production build there will be no warning.`
         );
       }
 
